@@ -87,6 +87,7 @@ def revert_image_color(image, original_image):
 # Initialize game and font
 pygame.init()
 pygame.font.init()
+pygame.mixer.init()
 
 # Character
 char_Color = (234, 0, 124)
@@ -125,6 +126,11 @@ charmander = pygame.image.load("images/charmander.png").convert_alpha()
 mew = pygame.image.load("images/MewFront.png").convert_alpha()
 scaled_mew = pygame.transform.scale(mew, (300, 300))
 scaled_mew_damage = scaled_mew.copy()
+
+#MUSIC PATH
+pygame.mixer.music.load("music/Intro.mp3")
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(loops=-1)
 
 # Fonts
 font = pygame.font.SysFont('none', 30)
@@ -220,6 +226,12 @@ while main:
         elif event.type == pygame.MOUSEBUTTONDOWN and not change_background:
             main = False
             change_background = True  # Change the background when screen is clicked
+            
+            pygame.mixer.music.stop()
+            #PLAY CHOOSE MUSIC
+            pygame.mixer.music.load("music/Choose.mp3")
+            pygame.mixer.music.set_volume(0.5)
+            pygame.mixer.music.play(loops=-1)
         
     pygame.display.flip()
 
@@ -250,6 +262,12 @@ while change_background:
                 print("You Choose a POKEMON")
                 change_background = False
                 is_next = True  # Proceed to the next loop
+
+
+                #PLAY CHOOSE MUSIC
+                # pygame.mixer.music.load("music/Battle.mp3")
+                # pygame.mixer.music.set_volume(0.5)
+                # pygame.mixer.music.play(loops=-1)
 
     if chosen_pokemon:
         if chosen_pokemon == "Bulbasaur":
@@ -312,6 +330,12 @@ while is_next:
                 is_next = False
                 is_attack = True
                 print("User use Attack")
+
+                pygame.mixer.music.stop()
+                #PLAY CHOOSE MUSIC
+                pygame.mixer.music.load("music/Battle.mp3")
+                pygame.mixer.music.set_volume(0.5)
+                pygame.mixer.music.play(loops=-1)
             if div_moves2.collidepoint(event.pos) and not button_pressed:
                 button_pressed = True
                 print("User Run")
@@ -376,8 +400,10 @@ while is_attack:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if div_moves3.collidepoint(event.pos) and not button_pressed:
                     button_pressed = True
-                    # is_attack = False
                     print("Pokemon use Vine Whip")
+                    vine_whip_sound = pygame.mixer.Sound("music/VineWhip.mp3")
+                    vine_whip_sound.set_volume(0.3)
+                    vine_whip_sound.play()
                     if mew_health.hp >= 0 or pokemon_health.hp >= 0:
                         attack_damage = random.randint(10, 30)
                         print(f"Pokemon Damage: {attack_damage}")
@@ -417,6 +443,9 @@ while is_attack:
                     button_pressed = True
                     # is_attack = False
                     print("Pokemon Use Tackle")
+                    tackle_sound = pygame.mixer.Sound("music/Tackle.mp3")
+                    tackle_sound.set_volume(0.3)
+                    tackle_sound.play()
                     if mew_health.hp >= 0 or pokemon_health.hp >= 0:
                         attack_damage = random.randint(15, 20)
                         print(f"Pokemon Damage: {attack_damage}")
@@ -462,6 +491,9 @@ while is_attack:
                 if div_moves3.collidepoint(event.pos) and not button_pressed:
                     button_pressed = True
                     print("Pokemon use Ember")
+                    ember_sound = pygame.mixer.Sound("music/Ember.mp3")
+                    ember_sound.set_volume(0.3)
+                    ember_sound.play()
                     if mew_health.hp >= 0 or pokemon_health.hp >= 0:
                         attack_damage = random.randint(10, 30)
                         print(f"Pokemon Damage: {attack_damage}")
@@ -499,6 +531,9 @@ while is_attack:
                 elif div_moves4.collidepoint(event.pos) and not button_pressed:
                     button_pressed = True
                     print("Pokemon Use Scratch")
+                    scratch_sound = pygame.mixer.Sound("music/Scratch.mp3")
+                    scratch_sound.set_volume(0.3)
+                    scratch_sound.play()
                     if mew_health.hp >= 0 or pokemon_health.hp >= 0:
                         attack_damage = random.randint(15, 20)
                         print(f"Pokemon Damage: {attack_damage}")
@@ -544,6 +579,9 @@ while is_attack:
                 if div_moves3.collidepoint(event.pos) and not button_pressed:
                     button_pressed = True
                     print("Pokemon use Water Gun")
+                    water_gun_sound = pygame.mixer.Sound("music/WaterGun.mp3")
+                    water_gun_sound.set_volume(0.3)
+                    water_gun_sound.play()
                     if mew_health.hp >= 0 or pokemon_health.hp >= 0:
                         attack_damage = random.randint(10, 30)
                         print(f"Pokemon Damage: {attack_damage}")
@@ -581,6 +619,9 @@ while is_attack:
                 elif div_moves4.collidepoint(event.pos) and not button_pressed:
                     button_pressed = True
                     print("Pokemon Use Bite")
+                    bite_sound = pygame.mixer.Sound("music/Bite.mp3")
+                    bite_sound.set_volume(0.3)
+                    bite_sound.play()
                     if mew_health.hp >= 0 or pokemon_health.hp >= 0:
                         attack_damage = random.randint(15, 20)
                         print(f"Pokemon Damage: {attack_damage}")
